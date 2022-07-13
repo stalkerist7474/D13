@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django.contrib.sites',
-    'django.contrib.flatpages',
+    #'django.contrib.sites',
+    #'django.contrib.flatpages',
 
     'allauth',
     'allauth.account',
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    #'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
 ROOT_URLCONF = 'board.urls'
@@ -148,4 +148,10 @@ AUTHENTICATION_BACKENDS = [
  
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
 ]
