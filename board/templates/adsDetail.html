@@ -1,0 +1,15 @@
+{% extends 'flatpages/default.html' %} 
+ 
+
+
+{% block title %}
+Ads details
+{% endblock title %}
+ 
+
+{% block content %}
+<h1>{{ newsDetail }}</h1>
+<br>
+<p>Дата публикации - {{ adsDetail.post_date_created|date:"d M Y"}} - {{ adsDetail.post_detailed_time_created}}</p> 
+<h3>{{ adsDetail.article_text}}</h3>
+{% endblock content %}
