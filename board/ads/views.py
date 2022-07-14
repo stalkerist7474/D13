@@ -9,7 +9,7 @@ class AdsList(ListView):
     model = Ad  
     template_name = 'ads.html'  
     context_object_name = 'ads' 
-    paginate_by = 3
+    paginate_by = 1
 
 
 class AdsDetail(DetailView):

@@ -9,7 +9,7 @@ class PostList(ListView):
     model = Post  
     template_name = 'post.html'  
     context_object_name = 'posts' 
-    paginate_by = 5
+    paginate_by = 1
 
 
 class PostDetail(DetailView):
