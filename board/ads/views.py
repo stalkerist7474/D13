@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Post, Ad
+from .models import Ad
 
 
 
@@ -9,7 +9,7 @@ class AdsList(ListView):
     model = Ad  
     template_name = 'ads.html'  
     context_object_name = 'ads' 
-    paginate_by = 10
+    paginate_by = 5
 
 
 class AdsDetail(DetailView):

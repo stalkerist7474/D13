@@ -3,14 +3,15 @@
 
 
 {% block title %}
-ads details
+news details
 {% endblock title %}
  
 
 {% block content %}
-<h1>{{ adsDetail.head_of_ad}}</h1>
+
+<h1>{{ postDetail.head_of_ad}}</h1>
 <br>
-<h2>{{ adsDetail.article_text}}</h2>
+<h2>{{ postDetail.article_text}}</h2>
 <br>
 <p>Дата публикации - {{ adsDetail.ad_date_created|date:"d M Y"}} - {{ adsDetail.ad_detailed_time_created}}</p> 
 
