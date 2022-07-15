@@ -1,3 +1,7 @@
+from asyncio.windows_events import NULL
+from email.policy import default
+from msilib.schema import Media
+from re import I
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -8,7 +12,13 @@ class User(models.Model):
     def __str__(self):
         return f'{self.full_name.title()}'
 
-    
+def ad_author_directory_path(instance, filename):
+    # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
+    return 'author_{0}/{1}'.format(instance.ad_author.id, filename) 
+
+def ad_image_author_directory_path(instance, filename):
+    # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
+    return 'author_{0}/{1}'.format(instance.ad_author.id, filename)
 
 class Ad(models.Model):
     tank = 'TK'
@@ -38,15 +48,22 @@ class Ad(models.Model):
 
     
     head_of_ad = models.CharField(max_length = 255)
-    article_text = models.TextField()
+    article_text = models.TextField() 
     ad_author = models.ForeignKey(User, on_delete = models.CASCADE)
     ad_date_created = models.DateField(auto_now_add = True)
     ad_detailed_time_created = models.TimeField(auto_now_add = True)
     ad_category = models.CharField(max_length=2, choices= ROLE)
+    ad_images = models.ForeignKey(Image, on_delete = models.CASCADE)
+    ad_files = models.FileField(upload_to=ad_author_directory_path, default = NULL)
 
     def __str__(self):
         return f'{self.head_of_ad.title()}'
+
     
+class Image(models.Model):
+    #title = models.CharField(max_length = 255)
+    image = models.FileField(upload_to=ad_author_directory_path, default = NULL)
+
 
 
 class Response(models.Model):

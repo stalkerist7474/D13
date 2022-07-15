@@ -16,4 +16,9 @@ class AdsDetail(DetailView):
     model = Ad 
     template_name = 'adsDetail.html' 
     context_object_name = 'adsDetail' 
-    #queryset = Post.objects.filter()
+    
+
+def load_data(request):
+    # получаем все значения модели
+    data = Ad.objects.all()
+    return render(request, 'adsDetail.html', {'data': data})

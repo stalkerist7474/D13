@@ -8,3 +8,6 @@ class Post(models.Model):
     post_detailed_time_created = models.TimeField(auto_now_add = True)
     head_of_post = models.CharField(max_length = 255)
     article_text = models.TextField()
+
+    def __str__(self):
+        return f'{self.head_of_post.title()}'
