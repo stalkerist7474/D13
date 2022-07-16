@@ -14,11 +14,29 @@ class User(models.Model):
 
 def ad_author_directory_path(instance, filename):
     # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
-    return 'author_{0}/{1}'.format(instance.ad_author.id, filename) 
+    return 'author_{0}/{1}'.format(instance.author.id, filename) 
 
 def ad_image_author_directory_path(instance, filename):
     # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
-    return 'author_{0}/{1}'.format(instance.ad_author.id, filename)
+    return 'author_{0}/{1}'.format(instance.author.id, filename)
+
+
+class Image(models.Model):
+    title = models.CharField(max_length = 255)
+    image = models.ImageField(upload_to=ad_image_author_directory_path, default = NULL)
+    author = models.OneToOneField(User, on_delete = models.CASCADE, default = NULL)
+
+    def __str__(self):
+        return f'{self.title.title()}'
+
+class File(models.Model):
+    title = models.CharField(max_length = 255)
+    file = models.FileField(upload_to=ad_author_directory_path, default = NULL)
+    author = models.OneToOneField(User, on_delete = models.CASCADE, default = NULL)
+
+    def __str__(self):
+        return f'{self.title.title()}'
+
 
 class Ad(models.Model):
     tank = 'TK'
@@ -53,16 +71,12 @@ class Ad(models.Model):
     ad_date_created = models.DateField(auto_now_add = True)
     ad_detailed_time_created = models.TimeField(auto_now_add = True)
     ad_category = models.CharField(max_length=2, choices= ROLE)
-    ad_images = models.ForeignKey(Image, on_delete = models.CASCADE)
-    ad_files = models.FileField(upload_to=ad_author_directory_path, default = NULL)
+    ad_images = models.ForeignKey(Image,on_delete = models.CASCADE, default = NULL)
+    ad_files = models.ForeignKey(File,on_delete = models.CASCADE, default = NULL)
 
     def __str__(self):
         return f'{self.head_of_ad.title()}'
 
-    
-class Image(models.Model):
-    #title = models.CharField(max_length = 255)
-    image = models.FileField(upload_to=ad_author_directory_path, default = NULL)
 
 
 
