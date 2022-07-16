@@ -23,16 +23,16 @@ def ad_image_author_directory_path(instance, filename):
 
 class Image(models.Model):
     title = models.CharField(max_length = 255)
-    image = models.ImageField(upload_to=ad_image_author_directory_path, default = NULL)
-    author = models.OneToOneField(User, on_delete = models.CASCADE, default = NULL)
+    image = models.ImageField(upload_to=ad_image_author_directory_path, null=True)
+    author = models.OneToOneField(User, on_delete = models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.title.title()}'
 
 class File(models.Model):
     title = models.CharField(max_length = 255)
-    file = models.FileField(upload_to=ad_author_directory_path, default = NULL)
-    author = models.OneToOneField(User, on_delete = models.CASCADE, default = NULL)
+    file = models.FileField(upload_to=ad_author_directory_path, null=True)
+    author = models.OneToOneField(User, on_delete = models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.title.title()}'
@@ -71,8 +71,8 @@ class Ad(models.Model):
     ad_date_created = models.DateField(auto_now_add = True)
     ad_detailed_time_created = models.TimeField(auto_now_add = True)
     ad_category = models.CharField(max_length=2, choices= ROLE)
-    ad_images = models.ForeignKey(Image,on_delete = models.CASCADE, default = NULL)
-    ad_files = models.ForeignKey(File,on_delete = models.CASCADE, default = NULL)
+    ad_images = models.ForeignKey(Image,on_delete = models.CASCADE, null=True, blank=True)
+    ad_files = models.ForeignKey(File,on_delete = models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f'{self.head_of_ad.title()}'

@@ -10,9 +10,6 @@ ads details
 {% block content %}
 <h1>{{ adsDetail.head_of_ad}}</h1>
 
-<img src="{{ adsDetail.ad_images.image.url }}">
-<a href="{{ adsDetail.ad_files.file.url }}">{{ adsDetail.ad_files.title }}</a>
-
 <h1>{{ adsDetail.ad_images}}</h1>
 
 
@@ -23,7 +20,7 @@ ads details
 
         {% for img in adsDetail.ad_images %} 
             
-            <img src="{{ img.ad_images.image.url }}">
+            <img src="{{ img.ad_images.image.url }}" class = "rounded float-left img-fluid">
 
         {% endfor %}
         
@@ -31,10 +28,11 @@ ads details
         
 
     {% else %}
-        <img src="{{ adsDetail.ad_images.image.url }}">
+        <img src="{{ adsDetail.ad_images.image.url }}" class = "rounded float-left img-fluid">
     {% endif %}
 {% endif %}
 
+<a href="{{ adsDetail.ad_files.file.url }}">{{ adsDetail.ad_files.title }}</a>
 
 
 
