@@ -1,0 +1,68 @@
+{% extends 'flatpages/default.html' %} 
+
+
+
+
+
+{% block title %}
+Ads search list
+{% endblock title %}
+ 
+
+{% block content %}
+    <h1>Найдено по параметрам - {{ filter.qs|length }} шт.</h1>
+     
+    <form method="GET">
+    {{ filter.form }} 
+    <input type="submit" value="Найти">
+    </form>
+
+
+
+    <hr>
+    {% if searchAds  %} 
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+                <td>
+                    Дата публикации
+                </td>
+                <td>
+                    Краткий текст
+                </td>
+                <td>
+                    Категория
+                </td>
+                
+            </tr>
+        {% for directAds in filter.qs %} 
+            <tr>
+                <td>
+                    <a href="{% url 'adsDetail' directAds.id %}">{{ directAds.head_of_ad }}</a>
+                </td>
+                <td>
+                    {{  directAds.ad_date_created|date:'d M Y'  }}
+                </td>
+                <td>
+                    {{ directAds.article_text|truncatechars:50 }}
+                </td>
+                <td>
+                    {{ directAds.ad_category }}
+                </td>
+                <br>
+            </tr>
+        {% endfor %}
+        </table>
+
+        
+    
+    
+    
+    
+    
+        {% else %}
+        <h2> Объявлений нет!</h2>
+    {% endif %}
+{% endblock content %}
