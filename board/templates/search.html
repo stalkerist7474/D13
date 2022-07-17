@@ -12,12 +12,17 @@ Ads search list
 {% block content %}
     <h1>Найдено по параметрам - {{ filter.qs|length }} шт.</h1>
      
-    <form method="GET">
-    {{ filter.form }} 
-    <input type="submit" value="Найти">
-    </form>
-
-
+    
+    <div class="row">
+        <div class="col">
+        <div class="card card-body ">
+            <form method="GET">
+                {{ filter.form }} 
+                <input class="btn btn-primary" type="submit" value="Search">
+            </form>
+        </div>
+        </div>
+    </div>
 
     <hr>
     {% if searchAds  %} 
