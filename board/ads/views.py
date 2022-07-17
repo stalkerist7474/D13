@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from .models import Ad
 from .forms import AdsForm
 from .filters import AdFilter
-from .forms import AdsForm
+
 
 class AdsList(ListView):
     model = Ad  
