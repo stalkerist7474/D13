@@ -18,7 +18,3 @@ class AdsDetail(DetailView):
     context_object_name = 'adsDetail' 
     
 
-def load_data(request):
-    # получаем все значения модели
-    data = Ad.objects.all()
-    return render(request, 'adsDetail.html', {'data': data})

@@ -9,10 +9,40 @@ news details
 
 {% block content %}
 
-<h1>{{ postDetail.head_of_ad}}</h1>
+<h1>{{ postDetail.head_of_post}}</h1>
 <br>
+
+<h1>{{ postDetail.post_images}}</h1>
+
+
+
+{% if postDetail.post_images  %} 
+    
+    {% if is_iterable %}
+
+        {% for img in postDetail.post_images %} 
+            
+            <img src="{{ img.post_images.image.url }}" class = "rounded float-left img-fluid">
+
+        {% endfor %}
+        
+        
+        
+
+    {% else %}
+        <img src="{{ postDetail.post_images.image.url }}" class = "rounded float-left img-fluid">
+    {% endif %}
+{% endif %}
+
+<a href="{{ postDetail.oist_files.file.url }}"><video src="{{ postDetail.post_files.file.url }}" class = "rounded float-left img-fluid"></a>
+
+
+
+
+
+
 <h2>{{ postDetail.article_text}}</h2>
 <br>
-<p>Дата публикации - {{ adsDetail.ad_date_created|date:"d M Y"}} - {{ adsDetail.ad_detailed_time_created}}</p> 
+<p>Дата публикации - {{ postDetail.post_date_created|date:"d M Y"}} - {{ postDetail.post_detailed_time_created}}</p> 
 
 {% endblock content %}
