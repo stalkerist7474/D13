@@ -11,6 +11,7 @@ class AdsList(ListView):
     template_name = 'ads.html'  
     context_object_name = 'ads' 
     paginate_by = 2
+    ordering = ['-id']
 
     def get_context_data(self, **kwargs): 
         context = super().get_context_data(**kwargs)
