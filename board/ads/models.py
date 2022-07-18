@@ -77,6 +77,9 @@ class Ad(models.Model):
     def __str__(self):
         return f'{self.head_of_ad.title()}'
 
+    def get_absolute_url(self): 
+        return f'/ads/{self.id}'
+
 
 
 

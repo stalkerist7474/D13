@@ -13,7 +13,7 @@
     
             {% csrf_token %} 
             <h2>login-{{ request.user.username.title }} </h2>
-            {{ form }} 
+            {{ form.as_p }} 
             <input class="btn btn-primary" type="submit" value="подтвердить">
         
         </form>
