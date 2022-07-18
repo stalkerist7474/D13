@@ -5,14 +5,11 @@ from .forms import PostForm
 from .filters import PostFilter
 
 
-
-
 class PostList(ListView):
     model = Post  
     template_name = 'post.html'  
     context_object_name = 'posts' 
     paginate_by = 1
-
 
     def get_context_data(self, **kwargs): 
         context = super().get_context_data(**kwargs)
@@ -50,13 +47,6 @@ class PostListForSearck(ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset()) 
         return context
-
-
-
-
-
-
-
 
 
 class PostDetail(DetailView):

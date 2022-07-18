@@ -1,0 +1,27 @@
+{% extends 'flatpages/default.html' %} 
+ 
+{% block title %} Ads edit {% endblock title %}
+ 
+{% block content %}
+<h2>Редактор объявления id-{{ ads.id }}</h2>
+
+
+<div class="row">
+    <div class="col">
+    <div class="card card-body ">
+        <form method="POST">
+    
+            {% csrf_token %} 
+            <h2>login-{{ request.user.username.title }} </h2>
+            {{ form }} 
+            <input class="btn btn-primary" type="submit" value="подтвердить">
+        
+        </form>
+
+    </div>
+    </div>
+</div>
+
+
+
+{% endblock content %} 

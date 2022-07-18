@@ -42,4 +42,32 @@ ads details
 <br>
 <p>Дата публикации - {{ adsDetail.ad_date_created|date:"d M Y"}} - {{ adsDetail.ad_detailed_time_created}}</p> 
 
+
+<tr>
+    <td>
+        <p>Автор - {{ adsDetail.ad_author}}</p>
+    </td>
+        
+</tr>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+            
+    <form action="{% url 'ads_update' adsDetail.id %}">
+        <button type="button submit" class="btn btn-primary btn-sm">Редактировать</button>
+    </form>
+    <form action="{% url 'ads_delete' adsDetail.id %}">
+        <button type="button submit" class="btn btn-primary btn-sm">Удалить</button>
+    </form>
+
+
+</div>
+
+
+
+
+
+
+
+
+
 {% endblock content %}
