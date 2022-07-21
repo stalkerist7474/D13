@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, UpdateView, CreateView, DetailView, DeleteView 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Ad
-from .forms import AdsForm
+from .forms import AdsForm,AdsFormImage,AdsFormFile
 from .filters import AdFilter
 
 
@@ -62,7 +62,16 @@ class AdsDetail(DetailView):
 
 
 
+class LoadImageView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    template_name = 'loadImage.html'
+    form_class = AdsFormImage
+    permission_required = ('ads.add_post',
+                           'ads.view_post')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_not_authors'] = not self.request.user.groups.filter(name = 'authors').exists()
+        return context
 
 
 
