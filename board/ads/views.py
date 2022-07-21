@@ -69,8 +69,7 @@ class LoadImageView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
                            'ads.view_post')
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['is_not_authors'] = not self.request.user.groups.filter(name = 'authors').exists()
+        context = super().get_context_data(**kwargs)        
         return context
 
 
@@ -87,8 +86,7 @@ class AdsCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
                            'ads.view_post')
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['is_not_authors'] = not self.request.user.groups.filter(name = 'authors').exists()
+        context = super().get_context_data(**kwargs)        
         return context
 
 # дженерик для редактирования объекта
@@ -104,8 +102,7 @@ class AdsUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return Ad.objects.get(pk=id)
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['is_not_authors'] = not self.request.user.groups.filter(name = 'authors').exists()
+        context = super().get_context_data(**kwargs)        
         return context
  
 # дженерик для удаления товара
@@ -117,6 +114,5 @@ class AdsDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
                            'ads.view_post')
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['is_not_authors'] = not self.request.user.groups.filter(name = 'authors').exists()
+        context = super().get_context_data(**kwargs)        
         return context
