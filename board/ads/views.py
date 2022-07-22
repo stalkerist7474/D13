@@ -24,8 +24,12 @@ class AdsList(ListView):
         context['ad_category'] = Ad.objects.all()
         context['ad_date_created'] = Ad.objects.all()
 
+        context['ad_images'] = Ad.objects.all()
+        context['ad_files'] = Ad.objects.all()
+
 
         context['form'] = AdsForm()
+        context['formImage'] = AdsFormImage()
         
         return context
     
@@ -72,7 +76,13 @@ class LoadImageView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)        
         return context
 
-
+    def post(self, request, *args, **kwargs):
+        form = AdsFormImage(request.POST) 
+ 
+        if form.is_valid(): 
+            form.save()
+ 
+        return super().get(request, *args, **kwargs)
 
 
 
