@@ -8,7 +8,7 @@ from .filters import AdFilter
 from django.core.files.storage import FileSystemStorage
 
 
-
+# дженерик списка объявлений
 class AdsList(ListView):
     model = Ad  
     template_name = 'ads.html'  
@@ -44,8 +44,7 @@ class AdsList(ListView):
  
         return super().get(request, *args, **kwargs)
 
-
-
+# дженерик поиска
 class AdListForSearck(ListView):
     model = Ad
     template_name = 'search.html'  
@@ -58,9 +57,7 @@ class AdListForSearck(ListView):
         context['filter'] = AdFilter(self.request.GET, queryset=self.get_queryset()) 
         return context
 
-
-
-
+# дженерик для подробной информации
 class AdsDetail(DetailView):
     model = Ad 
     template_name = 'adsDetail.html' 
@@ -72,9 +69,7 @@ class AdsDetail(DetailView):
         context['ad_files'] = Ad.objects.all()
         return context
     
-
-
-
+# дженерик для загрузки картинок
 class LoadImageView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     template_name = 'loadImage.html'
     form_class = AdsFormImage
@@ -92,7 +87,7 @@ class LoadImageView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
  
         return super().get(request, *args, **kwargs)
 
-
+# дженерик для загрузки файлов
 class LoadFileView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     template_name = 'loadFile.html'
     form_class = AdsFormFile
@@ -110,12 +105,7 @@ class LoadFileView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
  
         return super().get(request, *args, **kwargs)
 
-
-
-
-
-
-
+# дженерик для создания объекта
 class AdsCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     template_name = 'create_ads.html'
     form_class = AdsForm
