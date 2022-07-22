@@ -13,9 +13,9 @@ class AdsForm(ModelForm):
 class AdsFormImage(ModelForm):
     class Meta:
         model = Image
-        fields = ['title', 'image']
+        fields = ['title',  'image']
 
 class AdsFormFile(ModelForm):
     class Meta:
         model = File
-        fields = ['title', 'file']
+        fields = ['title',  'file']

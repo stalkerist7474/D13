@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AdsList, AdsDetail, AdListForSearck, AdsCreateView, AdsDeleteView, AdsUpdateView,LoadImageView
+from .views import AdsList, AdsDetail, AdListForSearck, AdsCreateView, AdsDeleteView, AdsUpdateView,LoadImageView, LoadFileView
 from django.views.decorators.cache import cache_page
 
 
@@ -13,6 +13,7 @@ urlpatterns = [
     path('edit/<int:pk>', AdsUpdateView.as_view(), name='ads_update'),
     path('delete/<int:pk>', AdsDeleteView.as_view(), name='ads_delete'),
 
-     path('load/', LoadImageView.as_view(), name='loadImage'),
+    path('loadImages/', LoadImageView.as_view(), name='loadImage'),
+    path('loadFiles/', LoadFileView.as_view(), name='loadFile'),
 
 ]

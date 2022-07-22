@@ -1,9 +1,12 @@
+from fileinput import filename
 from django.shortcuts import render
 from django.views.generic import ListView, UpdateView, CreateView, DetailView, DeleteView 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Ad
 from .forms import AdsForm,AdsFormImage,AdsFormFile
 from .filters import AdFilter
+from django.core.files.storage import FileSystemStorage
+
 
 
 class AdsList(ListView):
@@ -62,6 +65,12 @@ class AdsDetail(DetailView):
     model = Ad 
     template_name = 'adsDetail.html' 
     context_object_name = 'adsDetail' 
+
+    def get_context_data(self, **kwargs): 
+        context = super().get_context_data(**kwargs)
+        context['ad_images'] = Ad.objects.all()
+        context['ad_files'] = Ad.objects.all()
+        return context
     
 
 
@@ -77,12 +86,30 @@ class LoadImageView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        form = AdsFormImage(request.POST) 
- 
+        form = AdsFormImage(request.POST, request.FILES) 
         if form.is_valid(): 
             form.save()
  
         return super().get(request, *args, **kwargs)
+
+
+class LoadFileView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    template_name = 'loadFile.html'
+    form_class = AdsFormFile
+    permission_required = ('ads.add_post',
+                           'ads.view_post')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)        
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = AdsFormFile(request.POST, request.FILES) 
+        if form.is_valid(): 
+            form.save()
+ 
+        return super().get(request, *args, **kwargs)
+
 
 
 

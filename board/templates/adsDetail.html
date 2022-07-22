@@ -10,33 +10,23 @@ ads details
 {% block content %}
 <h1>{{ adsDetail.head_of_ad}}</h1>
 
-<h1>{{ adsDetail.ad_images}}</h1>
+
+{% for img in adsDetail.ad_images.all %}          
+<img src="{{ img.image.url }}" class = "rounded float-left img-fluid">
+<br>
+<br>
+{% endfor %}
 
 
 
-{% if adsDetail.ad_images  %} 
-    
-    {% if is_iterable %}
+{% for file in adsDetail.ad_files.all %} 
+<video width="400" height="300" controls>
+    <source src="{{ file.file.url }}" type="video/mp4">
+</video>
+<br>
+<br>
+{% endfor %}
 
-        {% for img in adsDetail.ad_images %} 
-            
-            <img src="{{ img.ad_images.image.url }}" class = "rounded float-left img-fluid">
-
-        {% endfor %}
-        
-        
-        
-
-    {% else %}
-        <img src="{{ adsDetail.ad_images.image.url }}" class = "rounded float-left img-fluid">
-    {% endif %}
-{% endif %}
-
-
-
-    <video width="400" height="300" controls>
-        <source src="{{ adsDetail.ad_files.file.url }}" type="video/mp4">
-    </video>
 
 
 <br>

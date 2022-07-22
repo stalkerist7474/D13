@@ -17,9 +17,26 @@
             <input class="btn btn-primary" type="submit" value="подтвердить">
         
         </form>
+        <br/>
+        <p>Вы можете загрузить дополнительные изображения и файлы</p>
+        <div class="btn-group" role="group" aria-label="Basic example">     
 
+
+            <form target="_blank" action="{% url 'loadImage' %}">
+                <button type="button submit" class="btn btn-primary btn-sm">Загрузить картинку</button>
+            </form>
+            
+            <form target="_blank" action="{% url 'loadFile' %}">
+                <button type="button submit" class="btn btn-primary btn-sm">Загрузить файлы</button>
+            </form>
+
+        </div>
     </div>
     </div>
+
+    
+
+
 </div>
 
 

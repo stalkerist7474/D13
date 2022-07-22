@@ -5,6 +5,8 @@ from re import I
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.core.validators import FileExtensionValidator
+
 class User(models.Model):
     full_name = models.CharField(max_length = 255)
     user = models.OneToOneField(User,on_delete = models.CASCADE)
@@ -14,25 +16,25 @@ class User(models.Model):
 
 def ad_author_directory_path(instance, filename):
     # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
-    return 'author_{0}/{1}'.format(instance.author.id, filename) 
+    return 'file_{0}/{1}'.format(instance.id, filename) 
 
 def ad_image_author_directory_path(instance, filename):
     # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
-    return 'author_{0}/{1}'.format(instance.author.id, filename)
+    return 'image_{0}/{1}'.format(instance.id, filename)
 
 
 class Image(models.Model):
     title = models.CharField(max_length = 255)
     image = models.ImageField(upload_to=ad_image_author_directory_path, null=True)
-    author = models.OneToOneField(User, on_delete = models.CASCADE, null=True)
+    #author = models.OneToOneField(User, on_delete = models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.title.title()}'
 
 class File(models.Model):
     title = models.CharField(max_length = 255)
-    file = models.FileField(upload_to=ad_author_directory_path, null=True)
-    author = models.OneToOneField(User, on_delete = models.CASCADE, null=True)
+    file = models.FileField(upload_to=ad_author_directory_path, null=True,validators=[FileExtensionValidator(['mp4'])])
+    #author = models.OneToOneField(User, on_delete = models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.title.title()}'
@@ -71,8 +73,8 @@ class Ad(models.Model):
     ad_date_created = models.DateField(auto_now_add = True)
     ad_detailed_time_created = models.TimeField(auto_now_add = True)
     ad_category = models.CharField(max_length=2, choices= ROLE)
-    ad_images = models.ForeignKey(Image,on_delete = models.CASCADE, null=True, blank=True)
-    ad_files = models.ForeignKey(File,on_delete = models.CASCADE, null=True, blank=True)
+    ad_images = models.ManyToManyField(Image, blank=True)
+    ad_files = models.ManyToManyField(File, blank=True)
 
     def __str__(self):
         return f'{self.head_of_ad.title()}'
