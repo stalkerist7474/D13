@@ -132,7 +132,7 @@ class AdsUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)        
         return context
  
-# дженерик для удаления товара
+# дженерик для удаления 
 class AdsDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     template_name = 'ads_delete.html'
     queryset = Ad.objects.all()

@@ -9,7 +9,21 @@ list of news
 
 {% block content %}
     <h1>Найдено новостей - {{ posts|length }} шт.<a href="/posts/search">Поиск</a></h1>
-     
+    
+    <div class="btn-group" role="group" aria-label="Basic example">
+            
+        <form action="/posts/search">
+            <button type="button submit" class="btn btn-primary btn-sm">Поиск</button>
+        </form>
+        <form action="{% url 'create_ads' %}">
+            <button type="button submit" class="btn btn-primary btn-sm">Добавить новую новость</button>
+        </form>
+
+
+    </div>
+
+
+
     <hr>
     {% if posts  %} 
         <table>
