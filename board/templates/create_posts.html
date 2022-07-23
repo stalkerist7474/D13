@@ -1,0 +1,44 @@
+{% extends 'flatpages/default.html' %} 
+ 
+{% block title %} Create news {% endblock title %}
+ 
+{% block content %}
+<h3>Информация о новости</h3>
+
+<div class="row">
+    <div class="col">
+    <div class="card card-body ">
+        <form method="POST">
+    
+            {% csrf_token %} 
+            <h2>login-{{ request.user.username.title }} </h2>
+            {{ form.as_p }} 
+            
+                   
+            <br/>
+            <input class="btn btn-primary" type="submit" value="Добавить новость">
+        
+        </form>
+        <br/>
+        <p>Вы можете загрузить дополнительные изображения и файлы</p>
+        <div class="btn-group" role="group" aria-label="Basic example">     
+
+
+            <form target="_blank">
+                <button class="btn btn-primary btn-sm" onClick="window.open('/posts/loadImages/', '', 'scrollbars=1,height='+Math.min(500, screen.availHeight)+',width='+Math.min(500, screen.availWidth)); return false;">Загрузить картинку</button></button>
+            </form>
+            
+            <form target="_blank">
+                <button class="btn btn-primary btn-sm" onClick="window.open('/posts/loadFiles/', '', 'scrollbars=1,height='+Math.min(500, screen.availHeight)+',width='+Math.min(500, screen.availWidth)); return false;">Загрузить файлы</button></button>
+            </form>
+
+
+        </div>
+    </div>
+    </div>
+    
+</div>
+
+
+
+{% endblock content %}

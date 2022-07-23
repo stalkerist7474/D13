@@ -1,0 +1,44 @@
+{% extends 'flatpages/default.html' %} 
+ 
+{% block title %} News edit {% endblock title %}
+ 
+{% block content %}
+<h2>Редактор новостей id-{{ posts.id }}</h2>
+
+
+<div class="row">
+    <div class="col">
+    <div class="card card-body ">
+        <form method="POST">
+    
+            {% csrf_token %} 
+            <h2>login-{{ request.user.username.title }} </h2>
+            {{ form.as_p }} 
+            <input class="btn btn-primary" type="submit" value="подтвердить">
+        
+        </form>
+        <br/>
+        <p>Вы можете загрузить дополнительные изображения и файлы</p>
+        <div class="btn-group" role="group" aria-label="Basic example">     
+
+
+            <form target="_blank" action="{% url 'loadImage' %}">
+                <button type="button submit" class="btn btn-primary btn-sm">Загрузить картинку</button>
+            </form>
+            
+            <form target="_blank" action="{% url 'loadFile' %}">
+                <button type="button submit" class="btn btn-primary btn-sm">Загрузить файлы</button>
+            </form>
+
+        </div>
+    </div>
+    </div>
+
+    
+
+
+</div>
+
+
+
+{% endblock content %} 

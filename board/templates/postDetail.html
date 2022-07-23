@@ -49,4 +49,19 @@ news details
 <br>
 <p>Дата публикации - {{ postDetail.post_date_created|date:"d M Y"}} - {{ postDetail.post_detailed_time_created}}</p> 
 
+<div class="btn-group" role="group" aria-label="Basic example">
+            
+    <form action="{% url 'posts_update' postDetail.id %}">
+        <button type="button submit" class="btn btn-primary btn-sm">Редактировать</button>
+    </form>
+    <form action="{% url 'posts_delete' postDetail.id %}">
+        <button type="button submit" class="btn btn-primary btn-sm">Удалить</button>
+    </form>
+
+
+</div>
+
+
+
+
 {% endblock content %}
