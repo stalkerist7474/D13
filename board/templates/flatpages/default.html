@@ -32,7 +32,9 @@
                                   <li><a class="dropdown-item" href="/posts/">News</a></li>
                                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                                   <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="#">Аccount</a></li>
+                                  <li><p>{{ request.user.username.title }}</p></li>
+                                  <li><a class="dropdown-item" href="http://127.0.0.1:8000/sign/login/?next={{request.path}}">Аccount</a></li>
+                                  <li><a class="dropdown-item" href="http://127.0.0.1:8000/sign/logout/">logout</a></li>
                                 </ul>
                               </div>
                         </li>
