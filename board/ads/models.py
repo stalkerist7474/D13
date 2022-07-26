@@ -4,15 +4,12 @@ from msilib.schema import Media
 from re import I
 from django.db import models
 from django.contrib.auth.models import User
+from sign.models import User
+
 
 from django.core.validators import FileExtensionValidator
 
-class User(models.Model):
-    full_name = models.CharField(max_length = 255)
-    user = models.OneToOneField(User,on_delete = models.CASCADE)
-    #alluath основа
-    def __str__(self):
-        return f'{self.full_name.title()}'
+
 
 def ad_author_directory_path(instance, filename):
     # путь, куда будет осуществлена загрузка MEDIA_ROOT/user_<id>/<filename>
