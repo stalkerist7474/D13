@@ -19,7 +19,7 @@ class MyUser(AbstractUser):
     full_name = models.CharField(max_length=MAX_NAME_LENGTH)
     gender = models.CharField(max_length=2, choices=GENDER, default=man)
     mailing = models.BooleanField(default=False)
-    #is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
     
 
     def __str__(self):
