@@ -1,18 +1,24 @@
+import random
+
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django import forms
+from django.core.mail import send_mail
+
+from .models import MyUser, OneTimeCode
 
 
 class BaseRegisterForm(UserCreationForm):
-    email = forms.EmailField(label = "Email")
-    first_name = forms.CharField(label = "Name")
-    last_name = forms.CharField(label = "Surname")
 
     class Meta:
-        model = User
-        fields = ("username", 
-                  "first_name", 
-                  "last_name", 
-                  "email", 
-                  "password1", 
-                  "password2", )
+        model = MyUser
+        fields = ["username",
+                  "full_name",
+                  "email",
+                  
+                  "gender",
+                  "mailing",
+                  ]
+
+
+class VerifiedCodeForm(forms.Form):
+    verified_fieid = forms.CharField()

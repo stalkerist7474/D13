@@ -1,10 +1,13 @@
 
 from django.contrib import admin
-from .models import User, Response, Ad, Image, File
+
+
+from .models import Response, Ad, Image, File
+from sign.models import MyUser
 
 
 
-admin.site.register(User)
+#admin.site.register(MyUser)
 admin.site.register(Response)
 admin.site.register(Ad)
 admin.site.register(Image)

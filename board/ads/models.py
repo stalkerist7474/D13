@@ -4,7 +4,7 @@ from msilib.schema import Media
 from re import I
 from django.db import models
 from django.contrib.auth.models import User
-from sign.models import User
+from sign.models import MyUser
 
 
 from django.core.validators import FileExtensionValidator
@@ -66,7 +66,7 @@ class Ad(models.Model):
     
     head_of_ad = models.CharField(max_length = 255)
     article_text = models.TextField() 
-    ad_author = models.ForeignKey(User, on_delete = models.CASCADE)
+    ad_author = models.ForeignKey(MyUser, on_delete = models.CASCADE)
     ad_date_created = models.DateField(auto_now_add = True)
     ad_detailed_time_created = models.TimeField(auto_now_add = True)
     ad_category = models.CharField(max_length=2, choices= ROLE)
@@ -84,7 +84,7 @@ class Ad(models.Model):
 
 class Response(models.Model):
     ad = models.ForeignKey(Ad, on_delete = models.CASCADE)
-    response_user = models.ForeignKey(User,on_delete = models.CASCADE)
+    response_user = models.ForeignKey(MyUser,on_delete = models.CASCADE)
     response_text = models.TextField()
     
 

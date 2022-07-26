@@ -1,9 +1,10 @@
-from django.contrib.auth.models import User
+
 from django.views.generic.edit import CreateView
 from .forms import BaseRegisterForm
+from .models import MyUser
 
 
 class BaseRegisterView(CreateView):
-    model = User
+    model = MyUser
     form_class = BaseRegisterForm
     success_url = '/ads/'

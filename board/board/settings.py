@@ -46,10 +46,11 @@ INSTALLED_APPS = [
     #'allauth',
     #'allauth.account',
     #'allauth.socialaccount',
-
-    'ads',
     'sign',
-    'news'
+    'ads',
+    
+    'news',
+    
 
 ]
 
@@ -154,3 +155,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/sign/login/'
 LOGIN_REDIRECT_URL = '/'
+
+
+AUTH_USER_MODEL = "sign.MyUser"
