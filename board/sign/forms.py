@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.core.mail import send_mail
 
-from .models import MyUser, OneTimeCode
+from .models import MyUser
 
 
 class BaseRegisterForm(UserCreationForm):
