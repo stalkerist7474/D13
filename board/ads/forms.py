@@ -1,6 +1,6 @@
 from pyexpat import model
 from django.forms import ModelForm
-from .models import Ad, Image, File
+from .models import Ad, Image, File, Response
 from django import forms
  
 # Создаём модельную форму
@@ -19,3 +19,12 @@ class AdsFormFile(ModelForm):
     class Meta:
         model = File
         fields = ['title',  'file']
+
+
+
+class ResponseForm(ModelForm):
+    response_text = forms.Textarea()
+
+    class Meta:
+        model = Response
+        fields = ["response_text"]

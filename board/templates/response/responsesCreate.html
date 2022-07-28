@@ -1,0 +1,12 @@
+{% extends 'adsDetail.html' %}
+
+{% block response %}
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+<!--        <p>{{ advertsement.title }}</p>-->
+        <input type="submit" value="Отправить" class="btn btn-primary">
+    </form>
+
+{% endblock response %}

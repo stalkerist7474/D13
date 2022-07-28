@@ -42,21 +42,23 @@ ads details
         
 </tr>
 
+
 <div class="btn-group" role="group" aria-label="Basic example">
             
+
+    {% block response %}
+    <form action="{% url 'response_ad' adsDetail.id %}">
+        <button type="button submit" class="btn btn-primary btn-sm">Оставить отклик</button>
+    </form>
+    {% endblock response %}
+
     <form action="{% url 'ads_update' adsDetail.id %}">
         <button type="button submit" class="btn btn-primary btn-sm">Редактировать</button>
     </form>
     <form action="{% url 'ads_delete' adsDetail.id %}">
         <button type="button submit" class="btn btn-primary btn-sm">Удалить</button>
     </form>
-
-
 </div>
-
-
-
-
 
 
 
