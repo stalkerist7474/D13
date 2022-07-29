@@ -1,21 +1,37 @@
 {% extends 'flatpages/default.html' %} 
 
 {% block title %}
-    Reply Detail
+    Response Detail
 {% endblock title %}
 
 {% block content %}
 
-    <div>
-        {% include 'message_boards/includes/reply_card_template.html' %}
-    </div>
 
-    {% if request.user == advertsement.user %}
-        <a href="" class="btn btn-primary">Редактировать</a>
+<h2>Отклик на объявление {{ response.ad_id }} от пользователя {{ response.response_user }}</h2>
+
+<p>{{ response.response_text}}</p>
+
+
+<div class="btn-group" role="group" aria-label="Basic example">
+            
+
+    {% if request.user == response.response_user %}
+    <form action="{% url 'response_ad' response.id %}">
+        <button type="button submit" class="btn btn-primary btn-sm">Редактировать</button>
+    </form>
     {% else %}
-        <a target="_blank" href="{% url 'reply_accept' reply.id %}" class="btn btn-primary">Принять отклик</a>
-        <a href="{% url 'reply_delete' reply.id %}" class="btn btn-primary">Удалить</a>
 
+    <form action="{% url 'response_accept' response.id %}">
+        <button type="button submit" class="btn btn-primary btn-sm">Принять отклик</button>
+    </form>
+    <form action="{% url 'response_delete' response.id %}">
+        <button type="button submit" class="btn btn-primary btn-sm">Удалить</button>
+    </form>
     {% endif %}
-    {% include 'message_boards/includes/button_back.html' %}
+</div>
+
+
+    
 {% endblock content %}
+
+    

@@ -1,5 +1,5 @@
 {% extends 'flatpages/default.html' %} 
-{% load custom_filters %}
+
 {% block title %}
     Объявления
 {% endblock title %}
@@ -13,10 +13,10 @@
     {% for response in filter.qs %}
 
         <div class="card">
-            <p>Отклик на объявление <a href="{{ response.advertsement.get_absolute_url }}">{{ response.advertsement.title }}</a></p>
+            <p>Отклик на объявление <a href="{{ response.ad_response.get_absolute_url }}">{{ response.ad_response }}</a></p>
             <div class="card-body">
-                <p class="card-text">User - {{ response.user_id }}</p>
-                <p class="card-text">{{ response.body }}</p>
+                <p class="card-text">User - {{ response.response_user }}</p>
+                <p class="card-text">{{ response.response_text }}</p>
 
                 <a href="{{ response.get_absolute_url }}" class="btn btn-primary">Смотреть</a>
 
@@ -24,29 +24,48 @@
         </div>
     {% endfor %}
 
+
+
+
+
     {% if is_paginated %}
+    <ul class="pagination">
+        <!-- Если доступна предыдущая страница, то даём ссылку на неё и самую первую страницу -->
         {% if page_obj.has_previous %}
-            <a href="?{% param_replace page=1 %}">First</a>
-            {% if page_obj.previous_page_number != 1 %}
-                <a href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
-            {% endif %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
+        </li>
+        <li class="page-item"></li>
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}"  tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+            
         {% endif %}
-
-<!--        Page {{ page_obj.number }} of {{ paginator.num_pages }}-->
-
+ 
+        <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
         {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
-                <a>{{ num }}</a>
+                <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ num }}</a></li>
+                
             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <a href="?{% param_replace %}&page={{ num }}">{{ num }}</a>
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                
             {% endif %}
         {% endfor %}
-
+ 
+        <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
         {% if page_obj.has_next %}
-            {% if page_obj.next_page_number != paginator.num_pages %}
-                <a href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
-            {% endif %}
-            <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
+
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" tabindex="-1" aria-disabled="true">Next</a>
+        </li>
+        <li class="page-item"></li>
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-disabled="true">Last</a>
+        </li>
+
         {% endif %}
+    </ul>
+
+
+        
     {% endif %}
 {% endblock content %}

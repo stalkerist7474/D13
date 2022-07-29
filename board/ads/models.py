@@ -83,12 +83,15 @@ class Ad(models.Model):
 
 
 class Response(models.Model):
-    ad = models.ForeignKey(Ad, on_delete = models.CASCADE)
+    ad_response = models.ForeignKey(Ad, on_delete = models.CASCADE)
     response_user = models.ForeignKey(MyUser,on_delete = models.CASCADE)
     response_text = models.TextField()
 
     class Meta:
         ordering = ['-id']
+
+    def __str__(self):
+        return f'{self.response_text[:10]}'
 
     def get_absolute_url(self):
         return f'/ads/user_response/{self.id}'

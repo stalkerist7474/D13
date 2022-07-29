@@ -21,6 +21,6 @@ class ResponseFilter(FilterSet):
         model = Response
         fields = (
             'response_text',
-            'ad',
+            'ad_response',
             'response_user'
         )
