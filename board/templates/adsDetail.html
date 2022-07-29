@@ -52,12 +52,19 @@ ads details
     </form>
     {% endblock response %}
 
+
+    {% if request.user == adsDetail.ad_author %}
+
     <form action="{% url 'ads_update' adsDetail.id %}">
         <button type="button submit" class="btn btn-primary btn-sm">Редактировать</button>
     </form>
     <form action="{% url 'ads_delete' adsDetail.id %}">
         <button type="button submit" class="btn btn-primary btn-sm">Удалить</button>
     </form>
+
+    {% endif %}
+
+
 </div>
 
 
