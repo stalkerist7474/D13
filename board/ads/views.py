@@ -174,19 +174,13 @@ class ResponseList(ListView):
 
     def get_context_data(self, *args, **kwargs):
         user_id = MyUser.objects.get(username=self.request.user).id
-        print('1111111111111111111111___________________',user_id)
-        print('2222222222222222222222___________________',self.request.user)
+        
         ad_id = Ad.objects.filter(ad_author=user_id)
-        print('3333333333333333333333___________________',ad_id)
-
+        
         context = super().get_context_data(*args, **kwargs)
         context['filter'] = ResponseFilter(self.request.GET, queryset=self.get_queryset())
-        print('4444444444444444444444444___________________',context['filter'])
-        print('5555555555555555555555___________________',Response.objects.all().count)
         context['responses'] = Response.objects.filter(ad_response_id__in=ad_id)
-        
-        print('66666666666666666666666___________________',context['responses'])
-
+             
         return context
     
 
