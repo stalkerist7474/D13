@@ -12,9 +12,6 @@ news details
 <h1>{{ postDetail.head_of_post}}</h1>
 <br>
 
-<h1>{{ postDetail.post_images}}</h1>
-
-
 
 {% if postDetail.post_images  %} 
     
@@ -45,7 +42,12 @@ news details
 
 
 
-<h2>{{ postDetail.article_text}}</h2>
+
+
+
+<div class="text-wrap text-start" style="word-wrap: break-word;">
+    <p>{{ postDetail.article_text}}</p>
+</div>
 <br>
 <p>Дата публикации - {{ postDetail.post_date_created|date:"d M Y"}} - {{ postDetail.post_detailed_time_created}}</p> 
 

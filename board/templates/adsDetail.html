@@ -6,7 +6,7 @@
 ads details
 {% endblock title %}
  
-
+<!-- content-->
 {% block content %}
 <h1>{{ adsDetail.head_of_ad}}</h1>
 
@@ -30,7 +30,9 @@ ads details
 
 
 <br>
-<h2>{{ adsDetail.article_text}}</h2>
+<div class="text-wrap text-start" style="word-wrap: break-word; ">
+    <p>{{ adsDetail.article_text}}</p>
+</div>
 <br>
 <p>Дата публикации - {{ adsDetail.ad_date_created|date:"d M Y"}} - {{ adsDetail.ad_detailed_time_created}}</p> 
 
@@ -42,7 +44,7 @@ ads details
         
 </tr>
 
-
+<!-- button-->
 <div class="btn-group" role="group" aria-label="Basic example">
             
 
