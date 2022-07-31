@@ -14,10 +14,10 @@ list of news
             
         <form action="/posts/search">
             <button type="button submit" class="btn btn-primary btn-sm">	
-                &#128269;Поиск</button>
+                &#128269;Search</button>
         </form>
         <form action="{% url 'create_posts' %}">
-            <button type="button submit" class="btn btn-primary btn-sm">Добавить новую новость</button>
+            <button type="button submit" class="btn btn-primary btn-sm">Add new news</button>
         </form>
 
 
@@ -26,37 +26,41 @@ list of news
 
 
     <hr>
-    {% if posts  %} 
-        <table>
-            <tr>
-                <td>
-                    Заголовок
-                </td>
-                <td>
-                    Дата публикации
-                </td>
-                <td>
-                    Краткий текст
-                </td>
-                
-                
-            </tr>
+          
+
+        {% if posts  %} 
         {% for directPost in posts %} 
-            <tr>
-                <td>
-                    <a href="{% url 'postDetail' directPost.id %}">{{ directPost.head_of_post }}</a>
-                </td>
-                <td>
-                    {{  directPost.post_date_created|date:'d M Y'  }}
-                </td>
-                <td>
-                    {{ directPost.article_text|truncatechars:50 }}
-                </td>
+       
+        <div class="card" style="width: auto;">
+            
+            {% for img in directAds.post_images.all  %} 
                 
-                <br>
-            </tr>
-        {% endfor %}
-        </table>
+                <img src="{{ img.image.url }}" class = "card-img-top .img-fluid ">
+                
+            <br>
+            <br>
+
+            {% endfor %}
+
+            
+            <div class="card-body">
+              <h5 class="card-title">{{ directPost.head_of_post }}</h5>
+              <p class="card-text">{{ directPost.article_text|truncatechars:50 }} </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                           
+              <li class="list-group-item">{{  directPost.post_date_created|date:'d M Y'  }} Автор-{{ directPost.post_author }}</li>
+            </ul>
+            <div class="card-body">
+              <a href="{% url 'postDetail' directPost.id %}" class="card-link">Смотреть</a>
+              
+            </div>
+          </div>
+
+          <hr>
+          {% endfor %}
+          
+
         {% if is_paginated %}
  
         <ul class="pagination">
