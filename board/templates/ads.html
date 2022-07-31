@@ -8,16 +8,16 @@ list of ads
  
 
 {% block content %}
-    <h1>Найдено объявлений - {{ ads|length }} шт.</h1>
+    
        
         <div class="btn-group" role="group" aria-label="Basic example">
             
             <form action="/ads/search">
                 <button type="button submit" class="btn btn-primary btn-sm">	
-                    &#128269;Поиск</button>
+                    &#128269;Search</button>
             </form>
             <form action="{% url 'create_ads' %}">
-                <button type="button submit" class="btn btn-primary btn-sm">Добавить новое объявление</button>
+                <button type="button submit" class="btn btn-primary btn-sm">Add a new ad</button>
             </form>
 
 
@@ -25,41 +25,55 @@ list of ads
 
 
     <hr>
-    {% if ads  %} 
-        <table>
-            <tr>
-                <td>
-                    Заголовок
-                </td>
-                <td>
-                    Дата публикации
-                </td>
-                <td>
-                    Краткий текст
-                </td>
-                <td>
-                    Категория
-                </td>
-                
-            </tr>
+        
+        {% if ads  %} 
         {% for directAds in ads %} 
-            <tr>
-                <td>
-                    <a href="{% url 'adsDetail' directAds.id %}">{{ directAds.head_of_ad }}</a>
-                </td>
-                <td>
-                    {{  directAds.ad_date_created|date:'d M Y'  }}
-                </td>
-                <td>
-                    {{ directAds.article_text|truncatechars:50 }}
-                </td>
-                <td>
-                    {{ directAds.ad_category }}
-                </td>
-                <br>
-            </tr>
-        {% endfor %}
-        </table>
+       
+        <div class="card" style="width: auto;">
+            
+            {% for img in directAds.ad_images.all  %} 
+                
+                <img src="{{ img.image.url }}" class = "card-img-top .img-fluid ">
+                
+            <br>
+            <br>
+
+            {% endfor %}
+
+            
+            <div class="card-body">
+              <h5 class="card-title">{{ directAds.head_of_ad }}</h5>
+              <p class="card-text">{{ directAds.article_text|truncatechars:50 }} </p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Категория-{{ directAds.get_ad_category_display }}</li>
+              
+              <li class="list-group-item">{{ directAds.ad_date_created|date:'d M Y' }} Автор-{{ directAds.ad_author }}</li>
+            </ul>
+            <div class="card-body">
+              <a href="{% url 'adsDetail' directAds.id %}" class="card-link">Смотреть</a>
+              
+            </div>
+          </div>
+
+          <hr>
+          {% endfor %}
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         {% if is_paginated %}
 
 
@@ -108,7 +122,7 @@ list of ads
 
 
         {% else %}
-        <h2> Новостей нет!</h2>
+        <h2>Нет!</h2>
     {% endif %}
    
     
