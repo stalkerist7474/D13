@@ -27,20 +27,22 @@
                           <div class="col">
                             <p style="margin-bottom: 0">{{ request.user.username.title }}</p>
                           </div>
-                            {% endif %}
+                            
 
                           <div class="col ">
                             <a style="margin-bottom: 0; text-decoration: none; color: white;" href="/ads/user_response/"><p style="margin-bottom: 0">Responses</p> </a>
                             
                           </div>
-
+                           {% endif %}
                           {% if request.user.is_authenticated %}
                           <div class="col ">
-                            <p style="margin-bottom: 0">&#10006Logout</p>
+                            <a style="margin-bottom: 0; text-decoration: none; color: white;" href="/sign/logout/"><p style="margin-bottom: 0">&#10006Logout</p> </a>
+                            
                           </div>
                           {% else %}
                           <div class="col ">
-                            <p style="margin-bottom: 0">login</p>
+                            <a style="margin-bottom: 0; text-decoration: none; color: white;" href="/sign/login/?next={{request.path}}"><p style="margin-bottom: 0">Login</p> </a>
+                            
                           </div>
                           {% endif %}
 
