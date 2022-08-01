@@ -8,7 +8,7 @@ from .forms import AdsForm,AdsFormImage,AdsFormFile,ResponseForm
 from .filters import AdFilter,ResponseFilter
 
 from django.template.loader import render_to_string
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse
 from django.core.mail import EmailMultiAlternatives
 
 # СЕКЦИЯ ОБЪЯВЛЕНИЙ_________________________________________________________________________________
@@ -155,7 +155,7 @@ class AdsUserView(LoginRequiredMixin, ListView):
         user_id = MyUser.objects.get(username=self.request.user).id
         return {
             **super().get_context_data(*args, **kwargs),
-            'ads': Ad.objects.filter(user_id=user_id)
+            'ads': Ad.objects.filter(ad_author=user_id)
         }
 
 # СЕКЦИЯ ОТКЛИКОВ_________________________________________________________________________________

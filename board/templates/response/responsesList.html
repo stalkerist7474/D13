@@ -12,11 +12,7 @@
     </form>
     {% for responses in filter.qs %}
 
-    {{ responses.response_user }}
-    1
-    {{ request.user.username }}
-
-        
+            
         <div class="card">
             <p>Отклик на объявление <a href="{{ responses.ad_response.get_absolute_url }}">{{ responses.ad_response }}</a></p>
             <div class="card-body">
