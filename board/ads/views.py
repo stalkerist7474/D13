@@ -74,11 +74,10 @@ class AdsDetail(DetailView):
         return context
     
 # дженерик для загрузки картинок
-class LoadImageView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class LoadImageView(LoginRequiredMixin, CreateView):
     template_name = 'loadImage.html'
     form_class = AdsFormImage
-    permission_required = ('ads.add_post',
-                           'ads.view_post')
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        
@@ -92,11 +91,10 @@ class LoadImageView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return super().get(request, *args, **kwargs)
 
 # дженерик для загрузки файлов
-class LoadFileView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class LoadFileView(LoginRequiredMixin, CreateView):
     template_name = 'loadFile.html'
     form_class = AdsFormFile
-    permission_required = ('ads.add_post',
-                           'ads.view_post')
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        
@@ -110,22 +108,20 @@ class LoadFileView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return super().get(request, *args, **kwargs)
 
 # дженерик для создания объекта
-class AdsCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class AdsCreateView(LoginRequiredMixin, CreateView):
     template_name = 'create_ads.html'
     form_class = AdsForm
-    permission_required = ('ads.add_post',
-                           'ads.view_post')
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        
         return context
 
 # дженерик для редактирования объекта
-class AdsUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class AdsUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'ads_update.html'
     form_class = AdsForm
-    permission_required = ('ads.change_post',
-                           'ads.view_post')
+    
  
     
     def get_object(self, **kwargs):
@@ -137,12 +133,11 @@ class AdsUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return context
  
 # дженерик для удаления 
-class AdsDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class AdsDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'ads_delete.html'
     queryset = Ad.objects.all()
     success_url = '/ads/'
-    permission_required = ('ads.delete_post',
-                           'ads.view_post')
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        
