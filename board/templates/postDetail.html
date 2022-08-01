@@ -6,43 +6,27 @@
 news details
 {% endblock title %}
  
-
+<!-- content-->
 {% block content %}
 
 <h1>{{ postDetail.head_of_post}}</h1>
 <br>
 
 
-{% if postDetail.post_images  %} 
-    
-    {% if is_iterable %}
-
-        {% for img in postDetail.post_images %} 
-            
-            <img src="{{ img.post_images.image.url }}" class = "rounded float-left img-fluid">
-
-        {% endfor %}
-        
-        
-        
-
-    {% else %}
-        <img src="{{ postDetail.post_images.image.url }}" class = "rounded float-left img-fluid">
-    {% endif %}
-{% endif %}
+{% for img in postDetail.post_images.all %}          
+<img src="{{ img.image.url }}" class = "rounded float-left img-fluid">
+<br>
+<br>
+{% endfor %}
 
 
-
-
-    <video width="400" height="300" controls>
-        <source src="{{ postDetail.post_files.file.url }}" type="video/mp4">
-    </video>
-
-
-
-
-
-
+{% for file in postDetail.post_files.all %} 
+<video width="400" height="300" controls>
+    <source src="{{ file.file.url }}" type="video/mp4">
+</video>
+<br>
+<br>
+{% endfor %}
 
 
 <div class="text-wrap text-start" style="word-wrap: break-word;">
@@ -51,6 +35,14 @@ news details
 <br>
 <p>Дата публикации - {{ postDetail.post_date_created|date:"d M Y"}} - {{ postDetail.post_detailed_time_created}}</p> 
 
+
+
+
+
+
+
+
+<!-- button-->
 <div class="btn-group" role="group" aria-label="Basic example">
         
     

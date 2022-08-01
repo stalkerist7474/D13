@@ -19,6 +19,10 @@ from .models import MyUser, OneTimeCode
 from .forms import BaseRegisterForm, VerifiedCodeForm
 from .token import account_activation_token
 
+from django.contrib.auth.forms import AuthenticationForm
+from django.urls import reverse
+from django.contrib import messages
+
 
 
 
@@ -27,8 +31,6 @@ from .token import account_activation_token
 class BaseRegisterView(CreateView):
     model = MyUser
     form_class = BaseRegisterForm
-    #success_url = '/ads/'
-
     success_url = '/sign/signup/verified_code_page/'
 
 
@@ -87,3 +89,8 @@ class VerifiedCodeView(FormView):
         else:
             form = VerifiedCodeView()
         return render(request, 'sign/verified_code_page.html', {'form': form})
+
+
+
+
+        

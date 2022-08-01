@@ -10,18 +10,26 @@
         {{ filter.form }}
         <input type="submit" value="Найти">
     </form>
-    {% for response in filter.qs %}
+    {% for responses in filter.qs %}
 
+    {{ responses.response_user }}
+    1
+    {{ request.user.username }}
+
+        
         <div class="card">
-            <p>Отклик на объявление <a href="{{ response.ad_response.get_absolute_url }}">{{ response.ad_response }}</a></p>
+            <p>Отклик на объявление <a href="{{ responses.ad_response.get_absolute_url }}">{{ responses.ad_response }}</a></p>
             <div class="card-body">
-                <p class="card-text">User - {{ response.response_user }}</p>
-                <p class="card-text">{{ response.response_text }}</p>
+                <p class="card-text">User - {{ responses.response_user }}</p>
+                <p class="card-text">{{ responses.response_text }}</p>
 
-                <a href="{{ response.get_absolute_url }}" class="btn btn-primary">Смотреть</a>
+                <a href="{{ responses.get_absolute_url }}" class="btn btn-primary">Смотреть</a>
 
             </div>
         </div>
+
+        {% if responses.response_user == request.user.username %}
+        {% endif %}
     {% endfor %}
 
 

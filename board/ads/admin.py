@@ -1,9 +1,6 @@
-
 from django.contrib import admin
-
-
 from .models import Response, Ad, Image, File
-from sign.models import MyUser
+
 
 
 

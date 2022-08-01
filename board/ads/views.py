@@ -17,7 +17,7 @@ class AdsList(ListView):
     model = Ad  
     template_name = 'ads.html'  
     context_object_name = 'ads' 
-    paginate_by = 3
+    paginate_by = 2
     ordering = ['-id']
 
     def get_context_data(self, **kwargs): 
@@ -27,7 +27,7 @@ class AdsList(ListView):
 
         context['head_of_ad'] = Ad.objects.all()
         context['article_text'] = Ad.objects.all()
-        context['ad_author'] = Ad.objects.all()
+        context['ad_author'] = Ad.objects.select_related('ad_author').all()
         context['ad_category'] = Ad.objects.all()
         context['ad_date_created'] = Ad.objects.all()
 
@@ -210,8 +210,8 @@ class ResponseCreateView(LoginRequiredMixin, CreateView):
         if form.is_valid():
             replies = Response(
                 response_text=request.POST['response_text'],
-                ad_id=self.get_object().id,
-                response_user_id=self.request.user.id
+                ad_response_id=self.get_object().id,
+                response_user=self.request.user
             )
             replies.save()
         return redirect('/ads/')
@@ -226,18 +226,18 @@ class ResponseDeleteView(LoginRequiredMixin, DeleteView):
 
 # функция для принятия отклика 
 def Response_accept(request, *args, **kwargs):
-    reply = Response.objects.get(id=kwargs['pk'])
-    user_reply_id = reply.user_id
-    user = MyUser.objects.get(id=user_reply_id)
+    response = Response.objects.get(id=kwargs['pk'])
+    user_response_id = response.response_user.id
+    user = MyUser.objects.get(id=user_response_id)
 
     html_content = render_to_string(
-        'message_boards/email_response_reply.html',
+        'response/email_response_reply.html',
         {
             'user': user
         }
     )
     msg = EmailMultiAlternatives(
-        subject={reply.body},
+        subject={response.response_text[:20]},
         body=f"Ответ на отклик",
         from_email='TestDjango1@yandex.ru',
         to=[user.email],
